@@ -1,0 +1,18 @@
+Game Engine (PyGame)
+Main game loop
+1. Handle events 
+	mouse click and input of the game
+	pygame.event.Event objects
+2. Update Game state
+	logics of the events (win, lose, even), next thing
+3. Draw game state to the screen
+	animation?
+
+Strategy Enumeration
+- Stars and Bars Theorem: To distribute N stars into K bins
+- Theorem 2: non-negative: ways to distribute n+k-1 objects to n (or k-1) spots
+- itertools.combinations
+- the zip() function returns an iterator of tuples based on the iterable object.
+
+Gambit Documentation:
+http://gambitproject.readthedocs.io/en/v15.1.1/
