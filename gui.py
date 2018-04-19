@@ -11,9 +11,10 @@ def main():
     app = QtGui.QApplication(sys.argv)
 
     window = QtGui.QWidget()
-    window.resize(900, 600)
+    window.resize(1280, 800)
     window.move(300, 250)
-    window.setWindowTitle("Balloon Game")
+    window.setWindowTitle("Colonel Balloon")
+
     window.show()
 
     sys.exit(app.exec_())
