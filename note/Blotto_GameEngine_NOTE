@@ -1,4 +1,5 @@
-Game Engine (PyGame)
+Game Engine (PyGame) NOTE
+
 Main game loop
 1. Handle events 
 	mouse click and input of the game
