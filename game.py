@@ -7,9 +7,11 @@ import itertools  # Combination Library
 from functools import reduce
 from operator import mul as multiple, add
 import numpy
+from random import choice
 True = -1
 False = 1
 Deuce = 0
+
 
 class Strategy:
     """Strategy Class"""
@@ -47,8 +49,6 @@ class Strategy:
             d = [b - a - 1 for a, b in z]
             yield d
 
-
-
     def plan_enumerations(self, n, k):
         """
 
@@ -68,18 +68,6 @@ class Strategy:
             if boo == 1:
                 copy.append(p)
         return copy
-
-
-class Test:
-    def __init__(self, a, b):
-        self.a = a
-        self.b = b
-
-    def __repr__(self):
-        return "<Test a:%s b:%s>" % (self.a, self.b)
-
-    def __str__(self):
-        return "From str method of Test: a is %s, b is %s" % (self.a, self.b)
 
 
 class Player:
@@ -118,89 +106,151 @@ class Player:
     def get_sLen(self):
         return self.sLen
 
-# # K is the number of battlefield
-# class BallGame(gambit):
-#     pass
-#
-#     def __init__(self, player1, player2):
-#         self.players = [player1, player2]
-#         #self.
-
-
-p = [Player() for i in range(2)]
-p[0].name = "Anna"
-p[1].name = "Thanh"
-k = 4
-p[0].ball = 6
-p[1].ball = 6
-p[0].set_strategy(k)
-p[1].set_strategy(k)
-# for pl in p:
-#     print pl.ball
-#print p[0], p[1]
-print p[0].sLen
-#print p[0].get_strategy()
+#   ATTEMPT TO OVERRIDE CLASS METHOD STRATEGY SO THAT THE LABEL IS TUPLE AND NOT STRING
+# class Strategy(gambit.Strategy):
+#     def __init__(self):
+#         self.label = 0
 
 
 
-print "----------GAMEBIT-------------"
-# for i in range(0,p[1].get_sLen()):
-#     print p[1].get_strategy()[i]
-# Gambit & Strategic game
-g = gambit.Game.new_table([p[0].get_sLen(), p[1].get_sLen()])
-g.title = "Balloon Game"
+def main():
+    # Three level with 3 types of strategies: Uniform distribution, Left focus, and uniform
+    print("BLOTTO GAME")
+    p = [Player() for i in range(2)]
+    p[0].name = raw_input("What is your name? ")
+    p[1].name = "Uniform"
+    p[0].ball = choice([6, 9, 12, 15, 18])
+    p[1].ball = p[0].ball
+    k = 3
+    p[0].set_strategy(k)
+    p[1].set_strategy(k)
+    # for pl in p:
+    #     print pl.ball
+    #print p[0], p[1]
+    # print p[0].sLen
+    #print p[0].get_strategy()
 
-strategies = [[] for i in range(2)]
 
-for i, pl in zip(range(2), p):
-    g.players[i].label = pl.name
-    plan_len = pl.sLen
-    print pl.name
-    for sIndex, strategy in zip(range(0, plan_len), pl.get_strategy()):
-        strategies[i].append(strategy)
-        g.players[i].strategies[sIndex].label = "%s" %(strategy)
+    print "----------GAMEBIT-------------"
+    # for i in range(0,p[1].get_sLen()):
+    #     print p[1].get_strategy()[i]
+    # Gambit & Strategic game
+    g = gambit.Game.new_table([p[0].get_sLen(), p[1].get_sLen()])
+    g.title = "Balloon Game"
 
-sub = [0 for i in range(k)]
-a = 0
-b = 0
-result = False
+    # Assign player's pure strategies to gambit.strategies
+    strategies = [[] for i in range(2)]
 
-# No Strategy????????????????
-s1_len = p[0].sLen
-s2_len = p[1].sLen
-pay1 = numpy.empty((s1_len,s2_len), dtype=gambit.Rational)
-pay2 = numpy.empty((s2_len,s1_len), dtype=gambit.Rational)
-print("s1_len:  %d, s2_len: %d" %(s1_len, s2_len))
-print("len(strategies): %d, %d" %(len(strategies[0]), len(strategies[1])))
-for s1 in strategies[0]:
-    for s2 in strategies[1]:
-        # print("Strategies P1: %s, P2: %s." %(s1,s2))
-        for i in range(k):
-            # print s1[i], s2[i]
-            if s1[i] > s2[i]:
-                sub[i] = 1
-            elif s1[i] < s2[i]:
-                sub[i] = -1
-            else:
-                sub[i] = 0
-        sum = reduce(add, sub)
-        if (sum > 0) or ((sum == 0) and (p[0].ball<p[1].ball)):
-            result = True
-        elif (sum < 0) or ((sum == 0) and (p[0].ball<p[1].ball)):
-            result = False
-        else:
-            result = Deuce
+    for i, pl in zip(range(2), p):
+        g.players[i].label = pl.name
+        plan_len = pl.sLen
+        for sIndex, strategy in zip(range(0, plan_len), pl.get_strategy()):
+            strategies[i].append(strategy)
+            g.players[i].strategies[sIndex].label = "%s" %(strategy)
 
-        pay1[a][b] = result
-        b += 1
-
-    a += 1
+    sub = [0 for i in range(k)]
+    a = 0
     b = 0
+    result = False
 
-print pay1
+    print p[0].sLen,  "Ways to distribute", p[0].ball,"balls over", k,"fields: "
+    for i in g.players[1].strategies:
+        print i.label
 
-g = gambit.Game.from_arrays(pay1, numpy.transpose(pay1))
-mixed = g.mixed_strategy_profile()
+    # Calculate Payoff from the strategy
+    s1_len = p[0].sLen
+    s2_len = p[1].sLen
+    pay = numpy.empty((s1_len,s2_len), dtype=gambit.Rational)
+    # pay2 = numpy.empty((s2_len,s1_len), dtype=gambit.Rational)
+    # print("s1_len:  %d, s2_len: %d" %(s1_len, s2_len))
+    # print("len(strategies): %d, %d" %(len(strategies[0]), len(strategies[1])))
+    for s1 in strategies[0]:
+        for s2 in strategies[1]:
+            # print("Strategies P1: %s, P2: %s." %(s1,s2))
+            for i in range(k):
+                # print s1[i], s2[i]
+                if s1[i] > s2[i]:
+                    sub[i] = 1
+                elif s1[i] < s2[i]:
+                    sub[i] = -1
+                else:
+                    sub[i] = 0
+            sum = reduce(add, sub)
+            if (sum > 0) or ((sum == 0) and (p[0].ball<p[1].ball)):
+                result = True
+            elif (sum < 0) or ((sum == 0) and (p[0].ball<p[1].ball)):
+                result = False
+            else:
+                result = Deuce
+
+            pay[a][b] = result
+            b += 1
+
+        a += 1
+        b = 0
+
+    # create the symmetrical payoff bimatrix
+    g = gambit.Game.from_arrays(pay, numpy.transpose(pay))
+
+    # MIXED STRATEGY
+    mixed = g.mixed_strategy_profile()
+
+    # Mixed strategy of naive focal point strategy is a
+    # pure strategy of strategy (n/k, n/k, n/k) --> the last strategy's prob = 1.0
+    for s in g.players[1].strategies:
+        mixed.__setitem__(s, 0)
+    # last strategy
+    mixed.__setitem__(g.players[1].strategies[s2_len-1], 1)
+    g.players[1].label = "Uniform"
+    print "Mixed strategies of player", g.players[1].label, ":", mixed[g.players[1]]
+
+# --------------------------------------------------------------------------
+    # LEFT FOCUS STRATEGY
+    p[1].name = "Left"
+    g.players[1].label = "Left"
+
+    # Mixed strategy of Left focused strategy is a
+    # probability distribution over the first few pure strategy list (0, a, b)
+    # The greater the b, the more likely the strategy is to played
+    left_focus = int(len(g.players[1].strategies)/2) + 1
+    unit = left_focus*(left_focus-1) / 2.0
+    unit = 1/unit
+    checksum = 0
+    for s in g.players[1].strategies:
+        left_focus -= 1
+        if left_focus<=0:
+            mixed.__setitem__(s, 0)
+        else:
+            mixed.__setitem__(s, left_focus*unit)
+            checksum += left_focus*unit
+
+    print "Mixed strategies of player", g.players[1].label,":", mixed[g.players[1]]
+    print "Check sum: ", checksum
+
+# ---------------------------------------------------------------------------------------
+    # RANDOMIZE STRATEGY --> SMART
+    p[1].name = "Ran"
+    g.players[1].label = "Ran"
+    # Mixed strategy of Smart strategy is randomize all pure strategy
+    mixed = g.mixed_strategy_profile()
+    print "Mixed strategies of player", g.players[1].label,":", mixed[g.players[1]]
+    print "Check sum: ", checksum
+
+    # NASH EQUILIBRIA
+    solver = gambit.nash.lcp_solve(g)
+    print("Solved the game")
+    print solver
+
+main()
+
+#
+# class Mixed(gambit.Game.MixedStrategyProfile):
+#     def __init__(self):
+#         gambit.Game.MixedStrategyProfile.__init__(self)
+#         pass
+#
+#     def __setitem__(self, key, value):
+
 # for p in mixed:
 #     print p
 #

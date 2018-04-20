@@ -127,6 +127,7 @@ class RuleScene(Scene):
         title = Orange(100).render("RULE", False, PINK)
         title_rect = title.get_rect()
         screen.blit(title, ((W-title_rect.width)/2, (H-title_rect.height)/5))
+
         # REDO THE BACKGROUND SO THAT THE RULE IS PRINTED IN THE BACKGROUND
         next = Slab(30).render("Enter to PLAY", False, BLACK)
         next_rect = next.get_rect()
@@ -159,17 +160,17 @@ class GameScene(Scene):
         play_screen = water_img.image.copy()
         play_screen.blit(lily_img.image, zero)
         screen.blit(play_screen, pygame.rect.Rect(0, 0, 128, 128))
-        frog1_img = Transparent(PLAYER, )
+        # frog1_img = Transparent(PLAYER, )
         # PLAY
 
         # RESULT
+
 
 def run(width, height, fps, start_scene):
     screen = pygame.display.set_mode((W, H))
     active_scene = start_scene
     pygame.display.set_caption('Colonel Balloon')
     timer = pygame.time.Clock()
-
 
     while active_scene != None:
         events = pygame.event.get()
