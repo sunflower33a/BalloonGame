@@ -1,24 +1,19 @@
-# import pygame, sys
-# from pygame.locals import *
-# import pygame_textinput
-# from MyFont import Peas, Orange, Slab
-import sys
 from PyQt4 import QtGui, QtCore
-from PyQt4.QtCore import Qt, QString
-# from PyQt4.QtGui import QImage, QPainter
-# from PyQt4.QtGui import QPixmap
+from PyQt4.QtCore import Qt, QString, pyqtSlot
 import Style
+import MyGame
 
-from PyGame import *
 
 class Window(QtGui.QWidget):
-    def __init__(self, parentt):
+    def __init__(self, game, parentt):
         QtGui.QWidget.__init__(self, parent=parentt)
         self.next = self
         self.N = 10
+        self.Game = game
 
-    def show_error_message(self):
-        pass
+    def show_error_message(self, msg):
+        print("msg")
+        exit(1)
 
     def Render(self, screen):
         raise NotImplementedError
@@ -38,7 +33,6 @@ class Window(QtGui.QWidget):
     def Terminate(self):
         self.SwitchToScene(None)
 
-
     def mousePressedEvent(self, QMouseEvent):
         print QMouseEvent.pos()
 
@@ -48,35 +42,37 @@ class Window(QtGui.QWidget):
 
 
 class TitleWindow(Window):
-    def __init__(self):
-        Window.__init__(self, mainWindow)
+    def __init__(self, game):
+        Window.__init__(self, game, mainWindow)
         self.next = self
+
         self.setWindowTitle('Window 1')
         pixmap = QtGui.QPixmap(START)
         self.bg = QtGui.QLabel(self)
         self.bg.setPixmap(pixmap)
 
-        self.button = QtGui.QPushButton("", self)
-        self.button.setFixedSize(80, 30)
-        self.button.clicked.connect(self.handleButton)
-        self.button.setStyleSheet("""QPushButton{
-            color: grey;
-            border-image: url(artwork/arrow-yel-1.png) 3 10 3 10;
-            border-top: 3px transparent;
-            border-bottom: 3px transparent;
-            border-right: 10px transparent;
-            border-left: 10px transparent;
-        }""")
-        self.button.setGeometry(W/2, H/2, 20, 20)
+        # User's Name Input
+        self.textbox = QtGui.QLineEdit(self)
+        self.textbox.resize(280, 40)
+        self.textbox.move((W-self.textbox.width())/2, (H-self.textbox.height())/2)
+        self.text_button = QtGui.QPushButton('', self)
+        self.text_button.setStyleSheet(Style.PlayButton)
+        self.text_button.move((W-self.text_button.width())/2, 40+((H-self.text_button.height())/2))
+        self.text_button.clicked.connect(self.handleTextButton)
+
+    def handleTextButton(self):
+        # Get name from the player
+        print self.textbox.text()
+        self.handleButton()
 
     def handleButton(self):
         print ('To Rule Window')
-        self.SwitchToScene(RuleWindow())
+        self.SwitchToScene(RuleWindow(game))
 
 
 class RuleWindow(Window):
-    def __init__(self):
-        Window.__init__(self, mainWindow)
+    def __init__(self, game):
+        Window.__init__(self, game, mainWindow)
         pixmap = QtGui.QPixmap(RULE)
         self.bg = QtGui.QLabel(self)
         self.bg.setPixmap(pixmap)
@@ -95,12 +91,12 @@ class RuleWindow(Window):
 
     def handleButton(self):
         print ('To Random Window')
-        self.SwitchToScene(RandomWindow())
+        self.SwitchToScene(RandomWindow(game))
 
 
 class RandomWindow(Window):
-    def __init__(self):
-        Window.__init__(self, mainWindow)
+    def __init__(self, game):
+        Window.__init__(self, game, mainWindow)
         pixmap = QtGui.QPixmap(BG)
         self.bg = QtGui.QLabel(self)
         self.bg.setPixmap(pixmap)
@@ -119,7 +115,7 @@ class RandomWindow(Window):
 
     def handleButton(self):
         print ('To Game Window')
-        self.SwitchToScene(GameWindow())
+        self.SwitchToScene(GameWindow(game))
 
 
 class Field(QtGui.QWidget):
@@ -128,11 +124,15 @@ class Field(QtGui.QWidget):
         self.value = value
         self.gui = QtGui.QLabel(parentt)
         self.gui.setText(str(self.value))
-        text = """QLabel{
+        text = """QLabel{   
+                            font-family: times
                             font-weight: bold; 
-                            color: blue;
+                            color: rgb(247, 115, 109);
                         }"""
         self.gui.setStyleSheet(text)
+        # X, Y of the image ball
+        self.x = 0
+        self.y = 0
 
     def up(self):
         self.value += 1
@@ -144,8 +144,8 @@ class Field(QtGui.QWidget):
 
 
 class GameWindow(Window):
-    def __init__(self):
-        Window.__init__(self, mainWindow)
+    def __init__(self, game):
+        Window.__init__(self, game, mainWindow)
         # BACKGROUND + FROG ========================================
         self.bg = WriteImage(WATER, LILY, self)
         self.bg = WriteImage(self.bg, PLAYER, self, 485, 472)
@@ -159,8 +159,15 @@ class GameWindow(Window):
         butt_h = 35
 
         self.field_A = Field(self)
+        self.field_A.x = 930
+        self.field_A.y = 460
         self.field_B = Field(self)
+        self.field_B.x = 608
+        self.field_B.y = 344
         self.field_C = Field(self)
+        self.field_C.x = 700
+        self.field_C.y = 230
+
         my_font = QtGui.QFont("Times", 48, QtGui.QFont.Bold)
 
         self.buttonA_up = QtGui.QPushButton("", self)
@@ -203,23 +210,31 @@ class GameWindow(Window):
 
         self.field_C.setFixedSize(50, 70)
         self.field_C.gui.setFont(my_font)
-        self.field_C.gui.setGeometry(820, 280, 90, 90)
+        self.field_C.gui.setGeometry(950, 280, 90, 90)
 
         self.play_button = QtGui.QPushButton("", self)
         self.play_button.clicked.connect(self.handlePlayButton)
-        # self.play_button.setStyleSheet()
-        self.play_button.setGeometry(W/2, H/2, butt_w, butt_h)
+        self.play_button.setStyleSheet(Style.PlayButton)
+        self.play_button.setGeometry(300, 556, 140, 70)
 
-
+    @pyqtSlot(bool)
     def handlePlayButton(self):
         player_choice = (self.field_A.value, self.field_B.value, self.field_C.value)
-        sum=0
+        sum = 0
         for i in player_choice:
             sum += i
             if sum<0 or sum>self.N:
                 self.show_error_message("Invalid numbers")
-
         print player_choice
+
+    @pyqtSlot(bool)
+    def onReleasePlayButton(self):
+        ''' When the button is released. '''
+        pass
+        # self.play_button = QtGui.QPushButton("", self)
+        # self.play_button.pressed.connect(self.handlePlayButton)
+        # self.play_button.released.connect(self.onReleasePlayButton)
+        # self.play_button.setGeometry(300, 556, 140, 70)
 
     # def up(self):
     #     pass
@@ -233,16 +248,19 @@ class GameWindow(Window):
         if field is A:
             self.field_A.up()
             if self.field_A.value == 1:
-                self.current_bg = WritePartImage(self.current_bg, BALLA, self, 930, 460)
+                self.current_bg = WritePartImage(self.current_bg, BALLA, self, self.field_A.x, self.field_A.y)
                 self.main_label.setPixmap(QtGui.QPixmap.fromImage(self.current_bg))
         elif field is B:
             self.field_B.up()
             if self.field_B.value == 1:
-                self.current_bg = WriteImage(self.current_bg, BALLB, self, 540, 320)
+                self.current_bg = WritePartImage(self.current_bg, BALLB, self, self.field_B.x, self.field_B.y)
                 self.main_label.setPixmap(QtGui.QPixmap.fromImage(self.current_bg))
 
         elif field is C:
             self.field_C.up()
+            if self.field_C.value == 1:
+                self.current_bg = WritePartImage(self.current_bg, BALLC, self, self.field_C.x, self.field_C.y)
+                self.main_label.setPixmap(QtGui.QPixmap.fromImage(self.current_bg))
 
         # Event, number up, down
         # self.main_label.setPixmap(QtGui.QPixmap.fromImage(current_background))
@@ -254,20 +272,28 @@ class GameWindow(Window):
         if field is A:
             self.field_A.down()
             if self.field_A.value == 0:
-                ball_w = QtGui.QImage(BALLA).width()
-                ball_h = QtGui.QImage(BALLA).height()
-                self.current_bg = WritePartImage(self.current_bg, self.bg, self, 920, 420, ball_w, ball_h)
-                self.main_label.setPixmap(QtGui.QPixmap.fromImage(self.bg))
+                ball_w = QtGui.QImage(BALLA).width()+50
+                ball_h = QtGui.QImage(BALLA).height()+50
+                self.current_bg = WritePartImage(self.current_bg, self.bg,
+                                                 self, self.field_A.x-20, self.field_A.y-20, ball_w, ball_h)
+                self.main_label.setPixmap(QtGui.QPixmap.fromImage(self.current_bg))
         elif field is B:
             self.field_B.down()
             if self.field_B.value == 0:
-                ball_w = QtGui.QImage(BALLB).width()
-                ball_h = QtGui.QImage(BALLB).height()
-                self.current_bg = WritePartImage(self.current_bg, self.bg, self, 520, 300, ball_w, ball_h)
-                self.main_label.setPixmap(QtGui.QPixmap.fromImage(self.bg))
+                ball_w = QtGui.QImage(BALLB).width()+60
+                ball_h = QtGui.QImage(BALLB).height()+60
+                self.current_bg = WritePartImage(self.current_bg, self.bg,
+                                                 self, self.field_B.x-40, self.field_B.y, ball_w, ball_h)
+                self.main_label.setPixmap(QtGui.QPixmap.fromImage(self.current_bg))
 
         elif field is C:
             self.field_C.down()
+            if self.field_C.value == 0:
+                ball_w = QtGui.QImage(BALLC).width()+60
+                ball_h = QtGui.QImage(BALLC).height()+60
+                self.current_bg = WritePartImage(self.current_bg, self.bg,
+                                                 self, self.field_C.x-40, self.field_C.y-40, ball_w, ball_h)
+                self.main_label.setPixmap(QtGui.QPixmap.fromImage(self.current_bg))
 
     def drawEvent(self, curr_bg, img):
         label = QtGui.QLabel(self)
@@ -296,7 +322,7 @@ class EndWindow(Window):
 
     def handleButton(self):
         print ('Hello World')
-        self.SwitchToScene(None)
+        self.SwitchToScene(a)
 
 
 class Label(QtGui.QLabel):
@@ -315,24 +341,27 @@ class Label(QtGui.QLabel):
 #     qp.drawPixmap(x, y, QtGui.QPixmap(overlay))
 #     return qp
 
+
 # CHECL WRITEPARTIMAGE
 def WritePartImage(img, over, parent, x, y, over_w=0, over_h=0):
     # image = img
     # over_w and h are for delete ball, over_w and h are the dimension of the areas you want to erase
     image = QtGui.QImage(img)
-    overlay = QtGui.QImage(over)
+    over1 = QtGui.QImage(over)
     # Rect with position x,y,w,h to crop of overlay
-    if overlay.size() < image.size():
-        rect = QtCore.QRect(0, 0, overlay.width(), overlay.height())
+    if over1.size() < image.size():
+        rect = QtCore.QRect(0, 0, over1.width(), over1.height())
     else:
-        rect = QtCore.QRect(x, y, over_w+5, over_h+5)
-    overlay = overlay.copy(rect)
+        rect = QtCore.QRect(x, y, over_w, over_h)
+
+    #crop the desireable part to draw on the image
+    overlay = over1.copy(rect)
 
     painter = QtGui.QPainter()
-    # painter.PixmapFragment(w, h)
     painter.begin(image)
     painter.drawImage(x, y, overlay)
     painter.end()
+
     return image    #QPixmap
 
 
@@ -387,44 +416,18 @@ def WriteImage(img, over, parent, x=0, y=0):
 #         print("He")
 #         # self.setCentralWidget(ImageWidget(surface))
 
-if __name__ == '__main__':
-    # s = PyGame.run((PyGame.W, PyGame.H), 6, PyGame.TitleScene())
-    # import pygame
-    # s = pygame.Surface((W, H))
-    # s.fill(WHITE)
-    # a = pygame.Surface(center)
-    # a.fill((23,233,24))
-    # s.blit(a, (0,0))
-    # active_scene = TitleScene()
-    # app = QtGui.QApplication(sys.argv)
-    # # w = MainWindow(s)
-    # w = TitleWindow(s)
 
-    # while active_scene is not None:
-    #     events = pygame.event.get()
-    #     pressed_key = pygame.key.get_pressed()
-    #     for event in events:
-    #         if event.type == QUIT:
-    #             pygame.quit()
-    #             sys.exit()
-    #
-    #     active_scene.HandleEvents(events, pressed_key)
-    #     active_scene.Update()
-    #     active_scene.Render(s)
-    #     w = AnotherWindow(s)
-    #
-    #     w.resize(W, H)
-    #     w.show()
-    #     app.exec_()
-    # s = pygame.surface.load
+import sys
+
+from MyGame import *
+from PyGame import *
+
+
+if __name__ == '__main__':
     app = QtGui.QApplication(sys.argv)
+    game = Game()   # Initiate main Game
     mainWindow = QtGui.QMainWindow()
-    mainWindow.setCentralWidget(TitleWindow())
+    mainWindow.setCentralWidget(TitleWindow(game))
     mainWindow.setGeometry(0, 0, W, H)
     mainWindow.show()
     sys.exit(app.exec_())
-
-    # w = AnotherWindow(s)
-    # active_scene = active_scene.next
-
-
