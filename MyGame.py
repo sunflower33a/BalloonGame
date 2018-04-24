@@ -3,102 +3,141 @@ Game Engine (?) Gambit and pygame
 """
 
 import gambit   # Game Theory Library
-import itertools  # Combination Library
-from functools import reduce
-from operator import mul as multiple, add
+from operator import add
 import numpy
 # from numpy import random
 from random import choice
+from MyPlayer import *
 True = -1
 False = 1
 Deuce = 0
 
-
-class Strategy:
-    """Strategy Class"""
-
-    def __init__(self):
-        pass
-
-    def nCr(self, n, r):
-        r = min(n, n - r)
-        a = reduce(multiple, xrange(n, n - r, -1), 1)
-        b = reduce(multiple, xrange(1, r + 1), 1)
-        return a // b
-
-    def plan_count(self, n, k):
-        """
-        :param n:
-        :param k:
-        :return:    only for all possible ways of distribute N objects into K spots
-        """
-        n = n+k-1
-        r = k-1
-        return self.nCr(n, r)
-
-    def partitions(self, n, k):
-        """
-            Strategy Enumeration
-            :param: n, k
-            :return: GENERATOR object of all the strategies
-            which are k tuples of n distribution
-        """
-
-        # return c = n-length tuples in range [0, n+k-1]
-        for c in itertools.combinations(range(n + k - 1), k - 1):
-            z = zip((-1,) + c, c + (n + k - 1,))
-            d = [b - a - 1 for a, b in z]
-            yield d
-
-    def plan_enumerations(self, n, k):
-        """
-
-        :param n,k
-        :return: A list of strategies such that the distribution is non-negative
-                 and each prev. distribution is no greater than the later
-                 k = 3, n = sum(a-c) --> (a,b,c) such that a<=b<=c and a,b,c >=0
-        """
-        plan = list(self.partitions(n, k))
-        copy = list()
-        for p in plan:
-            boo = 1
-            for i in range(k - 1):
-                if p[i] > p[i + 1]:
-                    boo = 0
-                    break
-            if boo == 1:
-                copy.append(p)
-        return copy
+#   ATTEMPT TO OVERRIDE CLASS METHOD STRATEGY SO THAT THE LABEL IS TUPLE AND NOT STRING
+# class Strategy(gambit.Strategy):
+#     def __init__(self):
 
 
-class Player:
-    """Player class"""
-
-    def __init__(self, name=""):
-        """
-                Construct a Student object. Simply sets the values of the attributes.
-
-                :param name: the name of the player
-        """
+class MyPlayer(Player):
+    """
+        Inheritances of Player class, extended for 3 types of computer players
+    """
+    def __init__(self, name, parent_game=None):
+        Player.__init__(self, name)
         self.name = name
-        self.ball = 0     # numbers of balloons player has
         self.score = 0
-        self.strategy = Strategy()     # Strategy Object
+        self.parent = parent_game
+        self.ball = self.parent.ball  # numbers of balloons player has
+        self.strategy = self.parent.strategy  # the game has the same strategy space
+        self.choice = None
+
+    # Randomly choose strategy based on probability,
+    # return the chosen strategy
+    def play(self, prob):
+        from numpy import cumsum
+        from numpy.random import rand
+        cs = cumsum(prob)  # An array of the weights, cumulatively summed.
+        choice = sum(cs < rand())
+        return self.strategy[choice]
+
+
+class RandomPlayer(MyPlayer):
+    def __init__(self, parent_level):
+        MyPlayer.__init__(self, "Random", parent_level)
+
+
+class UniformPlayer(MyPlayer):
+    def __init__(self, parent_level):
+        MyPlayer.__init__(self, "Uniform", parent_level)
+
+
+class RightPlayer(MyPlayer):
+    def __init__(self, parent_level):
+        MyPlayer.__init__(self, "Right", parent_level)
+
+class ThePlayer(MyPlayer):
+    def __init__(self, name, parent_level):
+        MyPlayer.__init__(self, name, parent_level)
+
+
+class Level():
+    """
+        The Game player has three levels when player play against 3 types of computer
+        Object Level contains 2 players between ThePlayer and Computer Player
+        Each level has at least 5 rounds, a level ends when either of the player gets 5 points
+    """
+    def __init__(self, player1, player2, my_parent_game):
+        self.player1 = player1
+        self.player2 = player2
+        self.round = 1
+        self.parent = my_parent_game
+
+    def decide_winner(self):
+        won_1 = 0
+        won_2 = 0
+        for p1, p2 in zip(self.player1.choice, self.player2.choice):
+            if p1>p2:
+                won_1 += 1
+            elif p2>p1:
+                won_2 += 1
+        if won_1>won_2:
+            self.winner(self.player1)
+        elif won_2>won_1:
+            self.winner(self.player2)
+        else:
+            self.winner(None)
+
+    def round_winner(self, player=None):
+        player.score += 1
+        self.round += 1
+
+    # def end_level(self):
+    #     if (self.player1.score==5) or (self.player2.score==5):
+    #         self.next =
+    #
+
+
+class Game():
+    """
+        input: Player objects 1 and 2
+    """
+    def __init__(self):
+        self.ball = 0
+        self.k = 3
+        self.strategy = Strategy()
         self.sLen = 0
+        self.current_level = None
 
-    def __repr__(self):
-        return [a for a in self.strategy]
+        the_player = ThePlayer("Thanh", self)
 
-    def  __str__(self):
-        return "<Player, Name: %s, Balloons: %d, Score %d, # of Strategies: %d.>" \
-                %(self.name, self.ball, self.score, self.sLen)
+        uniform_player = UniformPlayer(self)
+        uniform_level = Level(the_player, uniform_player, self)
+        uniform_player.lvl = uniform_level
 
-    def set_strategy(self, k):
+        right_player = RightPlayer(self)
+        right_level = Level(the_player, right_player, self)
+        right_player.lvl = right_level
+
+        random_player = RandomPlayer(self)
+        random_level = Level(the_player, random_player, self)
+        random_player.lvl = random_level
+
+        self.current_level = uniform_level
+        self.title = "Colonel Balloon"
+
+    def randomize_k(self):
+        return choice([6, 9, 12, 15, 18])
+
+    def random_ball(self):
+        # After letting the player randomize K, the game's strategy is set
+        self.ball = self.randomize_k()
+        self.set_strategy()
+
+    def set_strategy(self):
         """
         :param k: number of battlefields
         :return:  atrribute strategy is set & strategy len is updated
         """
-        self.strategy = self.strategy.plan_enumerations(self.ball, k)
+        self.strategy = self.strategy.plan_enumerations(self.ball, self.k)
         self.sLen = len(self.strategy)
 
     def get_strategy(self):
@@ -106,12 +145,6 @@ class Player:
 
     def get_sLen(self):
         return self.sLen
-
-#   ATTEMPT TO OVERRIDE CLASS METHOD STRATEGY SO THAT THE LABEL IS TUPLE AND NOT STRING
-# class Strategy(gambit.Strategy):
-#     def __init__(self):
-
-
 
 
 def main():
@@ -257,8 +290,6 @@ def main():
     print solver
 
 
-# Randomly choose strategy based on probability,
-# return the chosen strategy
 def play(prob, strategy):
     from numpy import cumsum
     from numpy.random import rand
