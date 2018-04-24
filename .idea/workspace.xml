@@ -3,8 +3,21 @@
   <component name="ChangeListManager">
     <list default="true" id="0bf2bea0-1e1a-4fb6-b7dd-c5e26b97cfce" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/artwork/BG/BG-leaves-full.png" beforeDir="false" afterPath="$PROJECT_DIR$/artwork/BG/BG-leaves-full.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/artwork/BG/BG-water-full.png" beforeDir="false" afterPath="$PROJECT_DIR$/artwork/BG/BG-water-full.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/artwork/BG/bg-background.png" beforeDir="false" afterPath="$PROJECT_DIR$/artwork/BG/bg-background.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/artwork/BG/bg-ruleSCREEN.png" beforeDir="false" afterPath="$PROJECT_DIR$/artwork/BG/bg-ruleSCREEN.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/artwork/BG/bg-startSCREEN.png" beforeDir="false" afterPath="$PROJECT_DIR$/artwork/BG/bg-startSCREEN.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/artwork/frog1.png" beforeDir="false" afterPath="$PROJECT_DIR$/artwork/frog1.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/artwork/frog2.png" beforeDir="false" afterPath="$PROJECT_DIR$/artwork/frog2.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/artwork/frog3.png" beforeDir="false" afterPath="$PROJECT_DIR$/artwork/frog3.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/artwork/frog4.png" beforeDir="false" afterPath="$PROJECT_DIR$/artwork/frog4.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/artwork/text-FRANK.png" beforeDir="false" afterPath="$PROJECT_DIR$/artwork/text-FRANK.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/artwork/text-YOU.png" beforeDir="false" afterPath="$PROJECT_DIR$/artwork/text-YOU.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/baloo.py" beforeDir="false" afterPath="$PROJECT_DIR$/baloo.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/game.py" beforeDir="false" afterPath="$PROJECT_DIR$/game.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/note/Blotto_GameEngine_NOTE" beforeDir="false" afterPath="$PROJECT_DIR$/note/Blotto_GameEngine_NOTE" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pygame_textinput.py" beforeDir="false" afterPath="$PROJECT_DIR$/pygame_textinput.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -21,8 +34,8 @@
       <file leaf-file-name="Strategy.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Strategy.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="47">
-              <caret line="46" column="11" lean-forward="true" selection-start-line="46" selection-start-column="11" selection-end-line="46" selection-end-column="11" />
+            <state relative-caret-position="82">
+              <caret line="43" column="36" selection-start-line="43" selection-start-column="36" selection-end-line="43" selection-end-column="36" />
             </state>
           </provider>
         </entry>
@@ -30,8 +43,36 @@
       <file leaf-file-name="baloo.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/baloo.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="268">
-              <caret line="164" lean-forward="true" selection-start-line="164" selection-end-line="164" />
+            <state relative-caret-position="121">
+              <caret line="317" column="22" selection-start-line="317" selection-start-column="22" selection-end-line="317" selection-end-column="22" />
+              <folding>
+                <element signature="e#117#127#0" expanded="true" />
+                <element signature="e#1021#1072#0" />
+                <element signature="e#915#1777#0" />
+                <element signature="e#1810#2669#0" />
+                <element signature="e#2704#3557#0" />
+                <element signature="e#7353#7539#0" />
+                <element signature="e#4695#5540#0" />
+                <element signature="e#5574#5849#0" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="MyFont.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/MyFont.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state>
+              <caret column="11" selection-start-column="5" selection-end-column="11" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="PyGame.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/PyGame.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-510">
+              <caret line="3" column="37" lean-forward="true" selection-start-line="3" selection-end-line="3" selection-end-column="37" />
               <folding>
                 <element signature="e#0#18#0" expanded="true" />
               </folding>
@@ -39,28 +80,22 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="game.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/game.py">
+      <file leaf-file-name="Style.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Style.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="51">
-              <caret line="3" lean-forward="true" selection-start-line="3" selection-end-line="3" />
-              <folding>
-                <element signature="e#43#80#0" expanded="true" />
-                <element signature="e#256#1823#0" />
-                <element signature="e#2106#3130#0" />
-                <element signature="e#7441#7442#0" />
-              </folding>
+            <state relative-caret-position="554">
+              <caret line="33" selection-start-line="33" selection-end-line="33" />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="initial.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/initial.py">
+      <file leaf-file-name="game.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/game.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-242">
-              <caret line="2" lean-forward="true" selection-start-line="2" selection-end-line="2" />
+            <state relative-caret-position="219">
+              <caret line="146" column="26" lean-forward="true" selection-start-line="146" selection-start-column="26" selection-end-line="146" selection-end-column="26" />
               <folding>
-                <element signature="e#0#13#0" expanded="true" />
+                <element signature="e#43#80#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -69,8 +104,8 @@
       <file leaf-file-name="pygame_textinput.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/pygame_textinput.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-442">
-              <caret line="19" column="45" lean-forward="true" selection-start-line="19" selection-start-column="45" selection-end-line="19" selection-end-column="45" />
+            <state relative-caret-position="2380">
+              <caret line="142" column="27" selection-start-line="142" selection-start-column="27" selection-end-line="142" selection-end-column="27" />
               <folding>
                 <element signature="e#81#94#0" expanded="true" />
               </folding>
@@ -82,7 +117,7 @@
         <entry file="file://$PROJECT_DIR$/note/Blotto_GameEngine_NOTE">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="306">
-              <caret line="18" column="44" lean-forward="true" selection-start-line="18" selection-start-column="44" selection-end-line="18" selection-end-column="44" />
+              <caret line="18" column="44" selection-start-line="18" selection-start-column="44" selection-end-line="18" selection-end-column="44" />
             </state>
           </provider>
         </entry>
@@ -98,20 +133,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>self._score</find>
-      <find>reduce</find>
-      <find>numpy</find>
-      <find>plan_</find>
-      <find>plan_e</find>
-      <find>player[</find>
-      <find>print</find>
-      <find>Colo</find>
-      <find>screee</find>
-      <find>WaterImg</find>
-      <find>window</find>
-      <find>1280</find>
-      <find>input</find>
-      <find>not</find>
       <find>KEYDOWN</find>
       <find>input_string</find>
       <find>update(</find>
@@ -128,6 +149,20 @@
       <find>s1</find>
       <find>players[1].label</find>
       <find>label</find>
+      <find>print</find>
+      <find>left</find>
+      <find>sum</find>
+      <find>PyGame</find>
+      <find>img</find>
+      <find>scene</find>
+      <find>clicked</find>
+      <find>conne</find>
+      <find>super</find>
+      <find>COMP</find>
+      <find>font</find>
+      <find>for</find>
+      <find>i] for</find>
+      <find>self.bg</find>
     </findStrings>
     <replaceStrings>
       <replace>self.name</replace>
@@ -135,6 +170,7 @@
       <replace>self.score</replace>
       <replace>p[</replace>
       <replace>water_img`</replace>
+      <replace>pygame</replace>
     </replaceStrings>
   </component>
   <component name="Git.Settings">
@@ -150,7 +186,6 @@
         <option value="$PROJECT_DIR$/gui.py" />
         <option value="$PROJECT_DIR$/pygame+PyQT4.py" />
         <option value="$PROJECT_DIR$/initializer.py" />
-        <option value="$PROJECT_DIR$/initial.py" />
         <option value="$PROJECT_DIR$/const.py" />
         <option value="$PROJECT_DIR$/Scene.py" />
         <option value="$PROJECT_DIR$/test_textInput.py" />
@@ -159,15 +194,23 @@
         <option value="$PROJECT_DIR$/note/design_NOTE" />
         <option value="$PROJECT_DIR$/note/Blotto_GameEngine_NOTE" />
         <option value="$PROJECT_DIR$/Strategy.py" />
+        <option value="$PROJECT_DIR$/initial.py" />
+        <option value="$PROJECT_DIR$/PyQt4_Button.py" />
         <option value="$PROJECT_DIR$/game.py" />
+        <option value="$PROJECT_DIR$/pygame.py" />
+        <option value="$PROJECT_DIR$/pyyyygame.py" />
+        <option value="$PROJECT_DIR$/PYQT_SwitchWindow.py" />
+        <option value="$PROJECT_DIR$/style.py" />
+        <option value="$PROJECT_DIR$/PyGame.py" />
         <option value="$PROJECT_DIR$/baloo.py" />
       </list>
     </option>
   </component>
-  <component name="ProjectFrameBounds">
-    <option name="y" value="24" />
-    <option name="width" value="1358" />
-    <option name="height" value="736" />
+  <component name="ProjectFrameBounds" extendedState="6">
+    <option name="x" value="10" />
+    <option name="y" value="34" />
+    <option name="width" value="1360" />
+    <option name="height" value="813" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true">
     <ConfirmationsSetting value="1" id="Add" />
@@ -177,17 +220,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="ProjectPane">
-        <subPane>
-          <expand>
-            <path>
-              <item name="JuniorIS" type="b2602c69:ProjectViewProjectNode" />
-              <item name="JuniorIS" type="462c0819:PsiDirectoryNode" />
-            </path>
-          </expand>
-          <select />
-        </subPane>
-      </pane>
       <pane id="Scope">
         <subPane subId="Project Files">
           <expand>
@@ -199,12 +231,23 @@
           <select />
         </subPane>
       </pane>
+      <pane id="ProjectPane">
+        <subPane>
+          <expand>
+            <path>
+              <item name="JuniorIS" type="b2602c69:ProjectViewProjectNode" />
+              <item name="JuniorIS" type="462c0819:PsiDirectoryNode" />
+            </path>
+          </expand>
+          <select />
+        </subPane>
+      </pane>
     </panes>
   </component>
   <component name="PropertiesComponent">
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../cs330FinalProject" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../git-keeper-Thuy" />
     <property name="run.code.analysis.last.selected.profile" value="pProject Default" />
-    <property name="settings.editor.selected.configurable" value="reference.idesettings.debugger.python" />
+    <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
   </component>
   <component name="PyDebuggerOptionsProvider">
     <option name="mySupportQtDebugging" value="false" />
@@ -231,7 +274,43 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Python.game">
+  <component name="RunManager" selected="Python.baloo">
+    <configuration name="PYQT_SwitchWindow" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <module name="JuniorIS" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/PYQT_SwitchWindow.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+    </configuration>
+    <configuration name="PyQt4_Button" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <module name="JuniorIS" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/PyQt4_Button.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+    </configuration>
     <configuration name="baloo" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <module name="JuniorIS" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -268,7 +347,7 @@
       <option name="EMULATE_TERMINAL" value="false" />
       <option name="MODULE_MODE" value="false" />
     </configuration>
-    <configuration name="main (1)" type="PythonConfigurationType" factoryName="Python" temporary="true">
+    <configuration name="pyyyygame" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <module name="JuniorIS" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -280,62 +359,26 @@
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/GraphicView.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <option name="MODULE_MODE" value="false" />
-    </configuration>
-    <configuration name="main" type="PythonConfigurationType" factoryName="Python" temporary="true">
-      <module name="JuniorIS" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/pygame+PyQT4.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <option name="MODULE_MODE" value="false" />
-    </configuration>
-    <configuration name="test_textInput" type="PythonConfigurationType" factoryName="Python" temporary="true">
-      <module name="JuniorIS" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/test_textInput.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/pyyyygame.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
       <option name="MODULE_MODE" value="false" />
     </configuration>
     <list>
-      <item itemvalue="Python.main" />
-      <item itemvalue="Python.main (1)" />
       <item itemvalue="Python.baloo" />
-      <item itemvalue="Python.test_textInput" />
       <item itemvalue="Python.game" />
+      <item itemvalue="Python.PyQt4_Button" />
+      <item itemvalue="Python.pyyyygame" />
+      <item itemvalue="Python.PYQT_SwitchWindow" />
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="Python.game" />
         <item itemvalue="Python.baloo" />
-        <item itemvalue="Python.main" />
-        <item itemvalue="Python.test_textInput" />
-        <item itemvalue="Python.main (1)" />
+        <item itemvalue="Python.game" />
+        <item itemvalue="Python.PYQT_SwitchWindow" />
+        <item itemvalue="Python.pyyyygame" />
+        <item itemvalue="Python.PyQt4_Button" />
       </list>
     </recent_temporary>
   </component>
@@ -378,7 +421,14 @@
       <option name="project" value="LOCAL" />
       <updated>1524110337443</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="- game.py: Specify strategy type and create command line functions for Blotto's internal strategy iteration">
+      <created>1524198795374</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1524198795374</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TodoView">
@@ -391,19 +441,18 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="0" y="24" width="1358" height="736" extended-state="0" />
+    <frame x="-1" y="-11" width="1362" height="780" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.25036818" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.25" />
       <window_info anchor="bottom" id="TODO" order="6" weight="0.3295082" />
-      <window_info anchor="bottom" id="Event Log" order="10" side_tool="true" />
-      <window_info anchor="bottom" id="Find" order="1" />
-      <window_info anchor="bottom" id="Run" order="2" visible="true" weight="0.3262295" />
+      <window_info anchor="bottom" id="Event Log" order="10" sideWeight="0.50073636" side_tool="true" weight="0.3262295" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" sideWeight="0.4992636" visible="true" weight="0.32352942" />
       <window_info anchor="bottom" id="Version Control" order="9" />
       <window_info anchor="bottom" id="Python Console" order="7" weight="0.32884902" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info anchor="bottom" id="Terminal" order="8" weight="0.3295082" />
-      <window_info anchor="bottom" id="Debug" order="3" weight="0.3967213" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.39628482" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
       <window_info anchor="right" id="Commander" order="0" weight="0.4" />
@@ -411,7 +460,27 @@
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
+      <window_info anchor="bottom" id="Find" order="1" />
     </layout>
+    <layout-to-restore>
+      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" sideWeight="0.4992636" visible="true" weight="0.32352942" />
+      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.25" />
+      <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
+      <window_info anchor="right" id="Commander" order="0" weight="0.4" />
+      <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
+      <window_info anchor="bottom" id="TODO" order="6" weight="0.3295082" />
+      <window_info anchor="bottom" id="Find" order="1" />
+      <window_info anchor="bottom" id="Python Console" order="7" weight="0.32884902" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.39628482" />
+      <window_info anchor="bottom" id="Terminal" order="8" weight="0.3295082" />
+      <window_info anchor="bottom" id="Event Log" order="10" sideWeight="0.50073636" side_tool="true" weight="0.3262295" />
+      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
+      <window_info anchor="bottom" id="Version Control" order="9" />
+      <window_info anchor="bottom" id="Message" order="0" />
+      <window_info id="Favorites" order="2" side_tool="true" />
+    </layout-to-restore>
   </component>
   <component name="VcsContentAnnotationSettings">
     <option name="myLimit" value="2678400000" />
@@ -420,7 +489,8 @@
     <MESSAGE value="- Strategy-enumeration: update requirements for strategies to reduce the number of strategies for effiecient computation&#10;- Player().strategy returns as list, not generator (generator lost data after called once)" />
     <MESSAGE value="- Update GUI of game engine, working with pygame in baloo.py&#10;- Need to take a look at game.py, seems like there's inconsistency between the Git version and ones in the local repo&#10;- Need to update the media (resized version)" />
     <MESSAGE value="- Add Note: Game Theory Note and Design Note" />
-    <option name="LAST_COMMIT_MESSAGE" value="- Add Note: Game Theory Note and Design Note" />
+    <MESSAGE value="- game.py: Specify strategy type and create command line functions for Blotto's internal strategy iteration" />
+    <option name="LAST_COMMIT_MESSAGE" value="- game.py: Specify strategy type and create command line functions for Blotto's internal strategy iteration" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -434,7 +504,7 @@
           </properties>
         </breakpoint>
       </default-breakpoints>
-      <option name="time" value="27" />
+      <option name="time" value="36" />
     </breakpoint-manager>
     <watches-manager>
       <configuration name="PythonConfigurationType">
@@ -445,11 +515,17 @@
         <watch expression="p.get_strategy()" language="Python" />
         <watch expression="a" language="Python" />
         <watch expression="p[1].sLen" language="Python" />
+        <watch expression="w" language="Python" />
       </configuration>
     </watches-manager>
   </component>
   <component name="debuggerHistoryManager">
     <expressions id="watch">
+      <expression>
+        <expression-string>w</expression-string>
+        <language-id>Python</language-id>
+        <evaluation-mode>EXPRESSION</evaluation-mode>
+      </expression>
       <expression>
         <expression-string>p[1].sLen</expression-string>
         <language-id>Python</language-id>
@@ -488,53 +564,6 @@
     </expressions>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/note/Blotto_GameEngine_NOTE">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="221">
-          <caret line="13" column="17" selection-start-line="13" selection-start-column="17" selection-end-line="13" selection-end-column="17" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Tetris.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="799">
-          <caret line="48" column="19" selection-start-line="48" selection-start-column="19" selection-end-line="48" selection-end-column="19" />
-          <folding>
-            <element signature="e#172#190#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Strategy.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="629">
-          <caret line="37" column="19" selection-start-line="37" selection-start-column="19" selection-end-line="37" selection-end-column="19" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/baloo.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1955">
-          <caret line="119" column="23" selection-start-line="119" selection-start-column="23" selection-end-line="119" selection-end-column="23" />
-          <folding>
-            <element signature="e#0#18#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/game.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="4097">
-          <caret line="245" selection-start-line="245" selection-end-line="245" />
-          <folding>
-            <element signature="e#43#80#0" expanded="true" />
-            <element signature="e#256#1823#0" />
-            <element signature="e#2106#3130#0" />
-            <element signature="e#7441#7442#0" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/note/design_NOTE">
       <provider selected="true" editor-type-id="text-editor">
         <state>
@@ -560,12 +589,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="986">
           <caret line="62" column="32" selection-start-line="62" selection-start-column="32" selection-end-line="62" selection-end-column="32" />
-          <folding>
-            <element signature="e#43#80#0" expanded="true" />
-            <element signature="e#256#1823#0" />
-            <element signature="e#2106#3130#0" />
-            <element signature="e#7441#7442#0" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -697,13 +720,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/MyFont.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="204">
-          <caret line="12" lean-forward="true" selection-start-line="12" selection-end-line="12" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/gui.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="136">
@@ -722,65 +738,107 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-291">
           <caret line="48" column="19" selection-start-line="48" selection-start-column="19" selection-end-line="48" selection-end-column="19" />
-          <folding>
-            <element signature="e#172#190#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Strategy.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="47">
-          <caret line="46" column="11" lean-forward="true" selection-start-line="46" selection-start-column="11" selection-end-line="46" selection-end-column="11" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/note/Blotto_GameEngine_NOTE">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="306">
-          <caret line="18" column="44" lean-forward="true" selection-start-line="18" selection-start-column="44" selection-end-line="18" selection-end-column="44" />
+          <caret line="18" column="44" selection-start-line="18" selection-start-column="44" selection-end-line="18" selection-end-column="44" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/game.py">
+    <entry file="file://$PROJECT_DIR$/PyQt4_Button.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="51">
-          <caret line="3" lean-forward="true" selection-start-line="3" selection-end-line="3" />
-          <folding>
-            <element signature="e#43#80#0" expanded="true" />
-            <element signature="e#256#1823#0" />
-            <element signature="e#2106#3130#0" />
-            <element signature="e#7441#7442#0" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/initial.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-242">
-          <caret line="2" lean-forward="true" selection-start-line="2" selection-end-line="2" />
-          <folding>
-            <element signature="e#0#13#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="629">
+          <caret line="37" lean-forward="true" selection-start-line="37" selection-end-line="37" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/pygame_textinput.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-442">
-          <caret line="19" column="45" lean-forward="true" selection-start-line="19" selection-start-column="45" selection-end-line="19" selection-end-column="45" />
+        <state relative-caret-position="2380">
+          <caret line="142" column="27" selection-start-line="142" selection-start-column="27" selection-end-line="142" selection-end-column="27" />
           <folding>
             <element signature="e#81#94#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/baloo.py">
+    <entry file="file://$PROJECT_DIR$/pyyyygame.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="268">
-          <caret line="164" lean-forward="true" selection-start-line="164" selection-end-line="164" />
+        <state relative-caret-position="294">
+          <caret line="135" column="47" lean-forward="true" selection-start-line="135" selection-start-column="46" selection-end-line="135" selection-end-column="47" />
           <folding>
             <element signature="e#0#18#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/artwork/BG/BG-water-full.png">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/initial.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="204">
+          <caret line="12" column="20" selection-start-line="12" selection-start-column="20" selection-end-line="12" selection-end-column="20" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Style.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="554">
+          <caret line="33" selection-start-line="33" selection-end-line="33" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/MyFont.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <caret column="11" selection-start-column="5" selection-end-column="11" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/game.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="219">
+          <caret line="146" column="26" lean-forward="true" selection-start-line="146" selection-start-column="26" selection-end-line="146" selection-end-column="26" />
+          <folding>
+            <element signature="e#43#80#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Strategy.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="82">
+          <caret line="43" column="36" selection-start-line="43" selection-start-column="36" selection-end-line="43" selection-end-column="36" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/PyGame.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-510">
+          <caret line="3" column="37" lean-forward="true" selection-start-line="3" selection-end-line="3" selection-end-column="37" />
+          <folding>
+            <element signature="e#0#18#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/baloo.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="121">
+          <caret line="317" column="22" selection-start-line="317" selection-start-column="22" selection-end-line="317" selection-end-column="22" />
+          <folding>
+            <element signature="e#117#127#0" expanded="true" />
+            <element signature="e#1021#1072#0" />
+            <element signature="e#915#1777#0" />
+            <element signature="e#1810#2669#0" />
+            <element signature="e#2704#3557#0" />
+            <element signature="e#7353#7539#0" />
+            <element signature="e#4695#5540#0" />
+            <element signature="e#5574#5849#0" />
           </folding>
         </state>
       </provider>
