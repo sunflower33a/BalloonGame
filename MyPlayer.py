@@ -1,101 +1,99 @@
-import itertools  # Combination Library
-from functools import reduce
-from operator import mul as multiple
+class MyPlayer():
+    """
+        Inheritances of Player class, extended for 3 types of computer players
+    """
+    def __init__(self, name, parent_game=None):
+        # Player.__init__(self, name)
+        self.name = name
+        self.score = 0
+        self.parent = parent_game
+        self.ball = self.parent.ball  # numbers of balloons player has
+        self.strategy = self.parent.strategy  # the game has the same strategy space
+        self.choice = None
+        self.mixed = []
 
-True = -1
-False = 1
-Deuce = 0
+    # Randomly choose strategy based on probability,
+    # return the chosen strategy
+    def play(self, prob):
+        from numpy import cumsum
+        from numpy.random import rand
+        cs = cumsum(prob)  # An array of the weights, cumulatively summed.
+        choice_index = sum(cs < rand())
+        self.choice = self.strategy[choice_index]
 
+    def print_mixed(self):
+        # Update Mixed
+        self.mixed = self.parent.mixed
+        print "Mixed strategies of player", self.name, ":", self.mixed
+        print self.name, "chooses:", self.play(self.mixed)
 
-class Strategy:
-    """Strategy Class"""
-
-    def __init__(self):
+    def mixed_strategy(self):
         pass
 
-    def nCr(self, n, r):
-        r = min(n, n - r)
-        a = reduce(multiple, xrange(n, n - r, -1), 1)
-        b = reduce(multiple, xrange(1, r + 1), 1)
-        return a // b
 
-    def plan_count(self, n, k):
-        """
-        :param n:
-        :param k:
-        :return:    only for all possible ways of distribute N objects into K spots
-        """
-        n = n+k-1
-        r = k-1
-        return self.nCr(n, r)
+class RandomPlayer(MyPlayer):
+    def __init__(self, parent_level):
+        MyPlayer.__init__(self, "Random", parent_level)
 
-    def partitions(self, n, k):
-        """
-            Strategy Enumeration
-            :param: n, k
-            :return: GENERATOR object of all the strategies
-            which are k tuples of n distribution
-        """
+    def mixed_strategy(self):
+        # Mixed strategy of Smart strategy is randomize all pure strategy
+        for mixed_index in self.parent.sLen:
+            self.parent.mixed[mixed_index] = float(1/sLen)
+        self.print_mixed()
 
-        # return c = n-length tuples in range [0, n+k-1]
-        for c in itertools.combinations(range(n + k - 1), k - 1):
-            z = zip((-1,) + c, c + (n + k - 1,))
-            d = [b - a - 1 for a, b in z]
-            yield d
 
-    def plan_enumerations(self, n, k):
-        """
+class UniformPlayer(MyPlayer):
+    def __init__(self, parent_level):
+        MyPlayer.__init__(self, "Uniform", parent_level)
 
-        :param n,k
-        :return: A list of strategies such that the distribution is non-negative
-                 and each prev. distribution is no greater than the later
-                 k = 3, n = sum(a-c) --> (a,b,c) such that a<=b<=c and a,b,c >=0
-        """
-        plan = list(self.partitions(n, k))
-        copy = list()
-        for p in plan:
-            boo = 1
-            for i in range(k - 1):
-                if p[i] > p[i + 1]:
-                    boo = 0
+    def mixed_strategy(self):
+        for i in range(len(self.parent.mixed)):
+            self.parent.mixed[i] = 0
+        # last strategy = 1
+        self.parent.mixed[self.parent.sLen-1] = 1
+        self.print_mixed()
+
+
+class RightPlayer(MyPlayer):
+    def __init__(self, parent_level):
+        MyPlayer.__init__(self, "Right", parent_level)
+
+    def mixed_strategy(self):
+        for i in range(len(self.parent.mixed)):
+            self.parent.mixed[i] = 0
+            # Mixed strategy of Right focused strategy is a
+            # probability distribution over the first few pure strategy list (0, a, b)
+            # The greater the b, the more likely the strategy is to played
+            checksum = 0
+            right_focus = 0
+            for s in self.parent.strategy:
+                mixed_index = self.parent.mixed.index(s)
+                if s[0] != 0:
+                    s[mixed_index] = 0
+                else:
+                    right_focus += 1
+            unit = right_focus * (right_focus + 1) / 2.0
+            unit = 1 / unit
+            i = 0
+            print unit
+            print right_focus
+            while True:
+                if right_focus == 0:
                     break
-            if boo == 1:
-                copy.append(p)
-        return copy
+                self.parent.mixed[i] = right_focus * unit
+                checksum += right_focus * unit
+                right_focus -= 1
+                i += 1
+
+            if checksum is not 1:
+                print("Mixed checksum is WRONG: ", checksum)
+            else:
+                print("Checksum is correct")
+
+            self.print_mixed()
 
 
-class Player:
-    """Player class"""
+class ThePlayer(MyPlayer):
+    def __init__(self, name, parent_level):
+        MyPlayer.__init__(self, name, parent_level)
 
-    def __init__(self, name=""):
-        """
-                Construct a Student object. Simply sets the values of the attributes.
-
-                :param name: the name of the player
-        """
-        self.name = name
-        self.ball = 0     # numbers of balloons player has
-        self.score = 0
-        self.strategy = Strategy()     # Strategy Object
-        self.sLen = 0
-
-    def __repr__(self):
-        return [a for a in self.strategy]
-
-    def  __str__(self):
-        return "<Player, Name: %s, Balloons: %d, Score %d, # of Strategies: %d.>" \
-                %(self.name, self.ball, self.score, self.sLen)
-
-    def set_strategy(self, k):
-        """
-        :param k: number of battlefields
-        :return:  atrribute strategy is set & strategy len is updated
-        """
-        self.strategy = self.strategy.plan_enumerations(self.ball, k)
-        self.sLen = len(self.strategy)
-
-    def get_strategy(self):
-        return self.strategy
-
-    def get_sLen(self):
-        return self.sLen

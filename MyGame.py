@@ -2,120 +2,16 @@
 Game Engine (?) Gambit and pygame
 """
 
-import gambit   # Game Theory Library
+import gambit  # Game Theory Library
 from operator import add
 import numpy
-# from numpy import random
-from random import choice
 from MyPlayer import *
+from random import choice
+from MyStrategy import *
+
 True = -1
 False = 1
 Deuce = 0
-
-#   ATTEMPT TO OVERRIDE CLASS METHOD STRATEGY SO THAT THE LABEL IS TUPLE AND NOT STRING
-# class Strategy(gambit.Strategy):
-#     def __init__(self):
-
-
-class MyPlayer(Player):
-    """
-        Inheritances of Player class, extended for 3 types of computer players
-    """
-    def __init__(self, name, parent_game=None):
-        Player.__init__(self, name)
-        self.name = name
-        self.score = 0
-        self.parent = parent_game
-        self.ball = self.parent.ball  # numbers of balloons player has
-        self.strategy = self.parent.strategy  # the game has the same strategy space
-        self.choice = None
-        self.mixed = []
-
-    # Randomly choose strategy based on probability,
-    # return the chosen strategy
-    def play(self, prob):
-        from numpy import cumsum
-        from numpy.random import rand
-        cs = cumsum(prob)  # An array of the weights, cumulatively summed.
-        choice_index = sum(cs < rand())
-        self.choice = self.strategy[choice_index]
-
-    def print_mixed(self):
-        # Update Mixed
-        self.mixed = self.parent.mixed
-        print "Mixed strategies of player", self.name, ":", self.mixed
-        print self.name, "chooses:", self.play(self.mixed)
-
-    def mixed_strategy(self):
-        pass
-
-
-class RandomPlayer(MyPlayer):
-    def __init__(self, parent_level):
-        MyPlayer.__init__(self, "Random", parent_level)
-
-    def mixed_strategy(self):
-        # Mixed strategy of Smart strategy is randomize all pure strategy
-        for mixed_index in self.parent.sLen:
-            self.parent.mixed[mixed_index] = float(1/sLen)
-        self.print_mixed()
-
-
-class UniformPlayer(MyPlayer):
-    def __init__(self, parent_level):
-        MyPlayer.__init__(self, "Uniform", parent_level)
-
-
-    def mixed_strategy(self):
-        for i in range(len(self.parent.mixed)):
-            self.parent.mixed[i] = 0
-        # last strategy = 1
-        self.parent.mixed[self.parent.sLen-1] = 1
-        self.print_mixed()
-
-
-class RightPlayer(MyPlayer):
-    def __init__(self, parent_level):
-        MyPlayer.__init__(self, "Right", parent_level)
-
-    def mixed_strategy(self):
-        for i in range(len(self.parent.mixed)):
-            self.parent.mixed[i] = 0
-            # Mixed strategy of Right focused strategy is a
-            # probability distribution over the first few pure strategy list (0, a, b)
-            # The greater the b, the more likely the strategy is to played
-            checksum = 0
-            right_focus = 0
-            for s in self.parent.strategy:
-                mixed_index = self.parent.mixed.index(s)
-                if s[0] != 0:
-                    s[mixed_index] = 0
-                else:
-                    right_focus += 1
-            unit = right_focus * (right_focus + 1) / 2.0
-            unit = 1 / unit
-            i = 0
-            print unit
-            print right_focus
-            while True:
-                if right_focus == 0:
-                    break
-                self.parent.mixed[i] = right_focus * unit
-                checksum += right_focus * unit
-                right_focus -= 1
-                i += 1
-
-            if checksum is not 1:
-                print("Mixed checksum is WRONG: ", checksum)
-            else:
-                print("Checksum is correct")
-
-            self.print_mixed()
-
-
-class ThePlayer(MyPlayer):
-    def __init__(self, name, parent_level):
-        MyPlayer.__init__(self, name, parent_level)
 
 
 class Level():
@@ -124,23 +20,26 @@ class Level():
         Object Level contains 2 players between ThePlayer and Computer Player
         Each level has at least 5 rounds, a level ends when either of the player gets 5 points
     """
-    def __init__(self, player1, player2, my_parent_game):
+
+    def __init__(self, player1, player2, my_parent_game, next_lvl):
         self.player1 = player1
         self.player2 = player2
         self.round = 1
         self.parent = my_parent_game
+        self.winner = None
+        self.next = next_lvl
 
     def decide_winner(self):
         won_1 = 0
         won_2 = 0
         for p1, p2 in zip(self.player1.choice, self.player2.choice):
-            if p1>p2:
+            if p1 > p2:
                 won_1 += 1
-            elif p2>p1:
+            elif p2 > p1:
                 won_2 += 1
-        if won_1>won_2:
+        if won_1 > won_2:
             self.winner(self.player1)
-        elif won_2>won_1:
+        elif won_2 > won_1:
             self.winner(self.player2)
         else:
             self.winner(None)
@@ -149,16 +48,18 @@ class Level():
         player.score += 1
         self.round += 1
 
-    # def end_level(self):
-    #     if (self.player1.score==5) or (self.player2.score==5):
-    #         self.next =
-    #
+    def end_level(self):
+        if (self.player1.score==5) or (self.player2.score==5):
+            # Switch to the next level
+            self.parent.current_level = self.next
+
 
 
 class Game():
     """
         input: Player objects 1 and 2
     """
+
     def __init__(self):
         self.ball = 0
         self.k = 3
@@ -168,17 +69,18 @@ class Game():
 
         self.the_player = ThePlayer("", self)
 
-        self.uniform_player = UniformPlayer(self)
-        self.uniform_level = Level(self.the_player, self.uniform_player, self)
-        self.uniform_player.lvl = self.uniform_level
+        self.random_player = RandomPlayer(self)
+        self.random_level = Level(self.the_player, self.random_player, self, None)
+        self.random_player.lvl = self.random_level
 
         self.right_player = RightPlayer(self)
-        self.right_level = Level(self.the_player, self.right_player, self)
+        self.right_level = Level(self.the_player, self.right_player, self, self.random_level)
         self.right_player.lvl = self.right_level
 
-        self.random_player = RandomPlayer(self)
-        self.random_level = Level(self.the_player, self.random_player, self)
-        self.random_player.lvl = self.random_level
+        self.uniform_player = UniformPlayer(self)
+        self.uniform_level = Level(self.the_player, self.uniform_player, self, self.right_level)
+        self.uniform_player.lvl = self.uniform_level
+
 
         self.current_level = self.uniform_level
         self.title = "Colonel Balloon"
@@ -215,9 +117,9 @@ class Game():
                 summ = reduce(add, sub)
                 # If wanting to have different ball for two players, let player has attribute ball
                 # And use self.current_level.player2.ball
-                if (summ > 0):
+                if summ > 0:
                     result = True
-                elif (summ < 0):
+                elif summ < 0:
                     result = False
                 else:
                     result = Deuce
