@@ -1,3 +1,6 @@
+from MyDefinition import *
+
+
 class MyPlayer():
     """
         Inheritances of Player class, extended for 3 types of computer players
@@ -31,6 +34,7 @@ class MyPlayer():
 class RandomPlayer(MyPlayer):
     def __init__(self, parent_level):
         MyPlayer.__init__(self, "Random", parent_level)
+        self.graphic = COMPC
 
     def mixed_strategy(self):
         # Mixed strategy of Smart strategy is randomize all pure strategy
@@ -43,6 +47,7 @@ class UniformPlayer(MyPlayer):
     def __init__(self, parent_level):
         MyPlayer.__init__(self, "Uniform", parent_level)
         self.mixed = [0] * self.parent.sLen
+        self.graphic = COMPA
 
     def mixed_strategy(self):
         print "Length of strategy vs sLEn", len(self.parent.strategy), self.parent.sLen
@@ -59,6 +64,7 @@ class RightPlayer(MyPlayer):
         MyPlayer.__init__(self, "Right", parent_level)
         for i in range(self.parent.sLen):
             self.parent.mixed[i] = 0
+        self.graphic = COMPB
 
     def mixed_strategy(self):
         for i in range(len(self.parent.mixed)):
@@ -98,4 +104,5 @@ class RightPlayer(MyPlayer):
 class ThePlayer(MyPlayer):
     def __init__(self, name, parent_level):
         MyPlayer.__init__(self, name, parent_level)
+        self.graphic = PLAYER
 
