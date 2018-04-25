@@ -12,7 +12,7 @@ class Window(QtGui.QWidget):
         self.Game = game
 
     def show_error_message(self, msg):
-        print("msg")
+        print("Error")
         exit(1)
 
     def Render(self, screen):
@@ -81,14 +81,7 @@ class RuleWindow(Window):
         self.button = QtGui.QPushButton("", self)
         self.button.setFixedSize(80, 30)
         self.button.clicked.connect(self.handleButton)
-        self.button.setStyleSheet("""QPushButton{
-                    color: grey;
-                    border-image: url(artwork/arrow-yel-1.png) 3 10 3 10;
-                    border-top: 3px transparent;
-                    border-bottom: 3px transparent;
-                    border-right: 10px transparent;
-                    border-left: 10px transparent;
-                }""")
+        self.button.setStyleSheet(Style.DefaultButtonStyle)
         self.button.setGeometry(W / 2, H / 2, 20, 20)
 
     def handleButton(self):
@@ -110,7 +103,7 @@ class RandomWindow(Window):
         self.next_button = QtGui.QPushButton("", self)
         self.next_button.setFixedSize(80, 30)
         self.next_button.clicked.connect(self.handleNextButton)
-        self.next_button.setStyleSheet(Style.DefaultStyle)
+        self.next_button.setStyleSheet(Style.DefaultButtonStyle)
         self.next_button.setGeometry(W / 2, H / 2, 20, 20)
         self.next_button.hide()
 
@@ -118,14 +111,13 @@ class RandomWindow(Window):
         self.random_button = QtGui.QPushButton("", self)
         self.random_button.setFixedSize(80, 30)
         self.random_button.clicked.connect(self.handleRandomButton)
-        self.random_button.setStyleSheet(Style.DefaultStyle)
+        self.random_button.setStyleSheet(Style.DefaultButtonStyle)
         self.random_button.setGeometry(600, 465, 20, 20)
 
 
     def handleRandomButton(self):
-        random = game.randomize_k()
         game.random_ball()
-        print random
+        print "Random:", game.ball
         self.next_button.show()
 
     def handleNextButton(self):
@@ -157,6 +149,10 @@ class Field(QtGui.QWidget):
         self.value -= 1
         self.gui.setText(str(self.value))
 
+    def set_value(self, value):
+        self.value = value
+        self.gui.setText(str(self.value))
+
 
 class GameWindow(Window):
     def __init__(self, game):
@@ -170,29 +166,54 @@ class GameWindow(Window):
         self.main_label = QtGui.QLabel(self)
         self.main_label.setPixmap(QtGui.QPixmap.fromImage(self.bg))
 
+        self.field_A = Field(self)
+        self.field_B = Field(self)
+        self.field_C = Field(self)
+
+        # Round and Level Info
+        self.gui_ball = Field(self)
+        self.gui_score = Field(self)
+        self.gui_round = Field(self)
+        self.gui_against = Field(self)
+
+        self.buttonA_up = QtGui.QPushButton("", self)
+        self.buttonA_down = QtGui.QPushButton("", self)
+        self.buttonB_up = QtGui.QPushButton("", self)
+        self.buttonB_down = QtGui.QPushButton("", self)
+
+        self.buttonC_up = QtGui.QPushButton("", self)
+        self.buttonC_down = QtGui.QPushButton("", self)
+
+        self.play_button = QtGui.QPushButton("", self)
+        self.drawRound()
+
+    def drawRound(self):
         # ON/OFF/DRAWING ===================================================
         butt_w = 34
         butt_h = 35
         my_font = QtGui.QFont("Times", 48, QtGui.QFont.Bold)
 
+        # Initiate GameInfo
+        self.gui_round.x = 60
+        self.gui_round.y = 130
+        self.gui_ball.x = 60
+        self.gui_round.y = 180
+        self.gui_score.x = 60
+        self.gui_score.y = 230
+
         # Initiate Coordinates of the three battlefields
-        self.field_A = Field(self)
         self.field_A.x = 930
         self.field_A.y = 460
-        self.field_B = Field(self)
         self.field_B.x = 608
         self.field_B.y = 344
-        self.field_C = Field(self)
         self.field_C.x = 700
         self.field_C.y = 230
 
         # Draw button A
-        self.buttonA_up = QtGui.QPushButton("", self)
         self.buttonA_up.clicked.connect(lambda: self.handleUpButton(A))
         self.buttonA_up.setStyleSheet(Style.YellowButton_up)
         self.buttonA_up.setGeometry(867, 502, butt_w, butt_h)
 
-        self.buttonA_down = QtGui.QPushButton("", self)
         self.buttonA_down.clicked.connect(lambda: self.handleDownButton(A))
         self.buttonA_down.setStyleSheet(Style.YellowButton_down)
         self.buttonA_down.setGeometry(867, 542, butt_w, butt_h)
@@ -203,12 +224,10 @@ class GameWindow(Window):
         self.field_A.gui.setGeometry(800, 500, 90, 90)
 
         # Draw button B
-        self.buttonB_up = QtGui.QPushButton("", self)
         self.buttonB_up.clicked.connect(lambda: self.handleUpButton(B))
         self.buttonB_up.setStyleSheet(Style.PinkButton_up)
         self.buttonB_up.setGeometry(496, 347, butt_w, butt_h)
 
-        self.buttonB_down = QtGui.QPushButton("", self)
         self.buttonB_down.clicked.connect(lambda: self.handleDownButton(B))
         self.buttonB_down.setStyleSheet(Style.PinkButton_down)
         self.buttonB_down.setGeometry(496, 387, butt_w, butt_h)
@@ -219,12 +238,10 @@ class GameWindow(Window):
         self.field_B.gui.setGeometry(445, 340, 90, 90)
 
         # Draw button C
-        self.buttonC_up = QtGui.QPushButton("", self)
         self.buttonC_up.clicked.connect(lambda: self.handleUpButton(C))
         self.buttonC_up.setStyleSheet(Style.YellowButton_up)
         self.buttonC_up.setGeometry(881, 286, butt_w, butt_h)
 
-        self.buttonC_down = QtGui.QPushButton("", self)
         self.buttonC_down.clicked.connect(lambda: self.handleDownButton(C))
         self.buttonC_down.setStyleSheet(Style.YellowButton_down)
         self.buttonC_down.setGeometry(881, 326, butt_w, butt_h)
@@ -235,29 +252,70 @@ class GameWindow(Window):
         self.field_C.gui.setGeometry(950, 280, 90, 90)
 
         # Draw PLAY BUTTON
-        self.play_button = QtGui.QPushButton("", self)
         self.play_button.clicked.connect(self.handlePlayButton)
         self.play_button.setStyleSheet(Style.PlayButton)
         self.play_button.setGeometry(300, 556, 140, 70)
+
+    def redraw_Round(self):
+        print "Round: ", self.Game.current_level.round, "against", self.Game.current_level.player2.name
+
+        self.field_A.set_value(0)
+        self.field_B.set_value(0)
+        self.field_C.set_value(0)
+        ball_w = QtGui.QImage(BALLA).width() + 50
+        ball_h = QtGui.QImage(BALLA).height() + 50
+        self.current_bg = WritePartImage(self.current_bg, self.bg,
+                                         self, self.field_A.x - 20, self.field_A.y - 20, ball_w, ball_h)
+
+        ball_w = QtGui.QImage(BALLB).width() + 60
+        ball_h = QtGui.QImage(BALLB).height() + 60
+        self.current_bg = WritePartImage(self.current_bg, self.bg,
+                                         self, self.field_B.x - 40, self.field_B.y, ball_w, ball_h)
+
+        ball_w = QtGui.QImage(BALLC).width() + 60
+        ball_h = QtGui.QImage(BALLC).height() + 60
+        self.current_bg = WritePartImage(self.current_bg, self.bg,
+                                         self, self.field_C.x - 40, self.field_C.y - 40, ball_w, ball_h)
+        self.main_label.setPixmap(QtGui.QPixmap.fromImage(self.current_bg))
+
+    def game_Main_logic(self):
+        if self.Game.current_level.end_level() is not True:
+            self.redraw_Round()
+            self.Game.current_level.player2.mixed_strategy()
+            self.game_Round_logic()
+        else:
+            if self.Game.current_level.next is not None:
+                self.Game.current_level.switch_level()
+            else:
+                print("Go to End Screen")
+                self.SwitchToScene(EndWindow(game))
+
+    def game_Round_logic(self):
+            player1_choice = self.Game.current_level.player1.choice
+            self.Game.current_level.player2.play()
+            player2_choice = self.Game.current_level.player1.choice
+            self.Game.current_level.decide_winner()
+            self.Game.current_level.round_winner(self.Game.current_level.winner)
+            if self.Game.current_level.winner is not None:
+                print "Winner:", self.Game.current_level.winner.name
+            else:
+                print "Winner: DEUCE"
+            print "Your score:", self.Game.current_level.player1.score
+            print "Frog's score:", self.Game.current_level.player2.score
 
     @pyqtSlot(bool)
     def handlePlayButton(self):
         player_choice = (self.field_A.value, self.field_B.value, self.field_C.value)
         sum = 0
-        for i in player_choice:
-            sum += i
-            if sum<0 or sum>self.N:
-                self.show_error_message("Invalid numbers")
-        game.the_player.choice = player_choice
-        self.game_logic()
-
-    def game_logic(self):
-        game.the_player.choice
-        game.current_level.round
+        # for i in player_choice:
+        #     sum += i
+        #     if sum < 0 or sum > game.ball:
+        #         self.show_error_message("Invalid numbers")
+        self.Game.the_player.choice = player_choice
+        self.game_Main_logic()
 
     def handleUpButton(self, field):
         # Show the number of balls on each field
-        print ('Up arrow pressed')
         if field is A:
             self.field_A.up()
             if self.field_A.value == 1:
@@ -280,7 +338,6 @@ class GameWindow(Window):
         # self.SwitchToScene(EndWindow())
 
     def handleDownButton(self, field):
-        print("Down Arrow pressed")
         # event,, number up, down
         if field is A:
             self.field_A.down()
@@ -315,27 +372,20 @@ class GameWindow(Window):
 
 
 class EndWindow(Window):
-    def __init__(self):
-        Window.__init__(self, mainWindow)
+    def __init__(self, game):
+        Window.__init__(self, game, mainWindow)
         pixmap = QtGui.QPixmap(RULE)
         self.bg = QtGui.QLabel(self)
         self.bg.setPixmap(pixmap)
         self.button = QtGui.QPushButton("", self)
         self.button.setFixedSize(80, 30 )
         self.button.clicked.connect(self.handleButton)
-        self.button.setStyleSheet("""QPushButton{
-                    color: grey;
-                    border-image: url(artwork/arrow-yel-1.png) 3 10 3 10;
-                    border-top: 3px transparent;
-                    border-bottom: 3px transparent;
-                    border-right: 10px transparent;
-                    border-left: 10px transparent;
-                }""")
+        self.button.setStyleSheet(Style.DefaultButtonStyle)
         self.button.setGeometry(W / 2, H / 2, 20, 20)
 
     def handleButton(self):
         print ('Hello World')
-        self.SwitchToScene(a)
+        exit(0)
 
 
 class Label(QtGui.QLabel):
@@ -441,6 +491,7 @@ if __name__ == '__main__':
     game = Game()   # Initiate main Game
     mainWindow = QtGui.QMainWindow()
     mainWindow.setCentralWidget(TitleWindow(game))
+
     mainWindow.setGeometry(0, 0, W, H)
     mainWindow.show()
     sys.exit(app.exec_())

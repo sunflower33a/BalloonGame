@@ -48,9 +48,9 @@ PlayButton = """QPushButton{
                         border-left: 10px transparent;
                     }"""
 
-DefaultStyle = """QPushButton{
+DefaultButtonStyle = """QPushButton{
                     color: grey;
-                    border-image: url(artwork/arrow-yel-1.png) 3 10 3 10;
+                    border-image: url(artwork/Butt-PLAY.png) 3 10 3 10;
                     border-top: 3px transparent;
                     border-bottom: 3px transparent;
                     border-right: 10px transparent;

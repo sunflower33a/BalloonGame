@@ -38,20 +38,33 @@ class Level():
             elif p2 > p1:
                 won_2 += 1
         if won_1 > won_2:
-            self.winner(self.player1)
+            self.winner = self.player1
         elif won_2 > won_1:
-            self.winner(self.player2)
+            self.winner = self.player2
         else:
-            self.winner(None)
+            self.winner = None
 
     def round_winner(self, player=None):
-        player.score += 1
+        if player is not None:
+            player.score += 1
         self.round += 1
 
     def end_level(self):
-        if (self.player1.score==5) or (self.player2.score==5):
+        if (self.player1.score >= 5) or (self.player2.score >= 5):
             # Switch to the next level
+            # Reset Score of player
+            self.player1.score = 0
+            self.round = 0
+            return True
+
+    def switch_level(self):
+        if self.next is not None:
             self.parent.current_level = self.next
+        else:
+            self.terminate()
+
+    def terminate(self):
+        pass
 
 
 
@@ -81,15 +94,15 @@ class Game():
         self.uniform_level = Level(self.the_player, self.uniform_player, self, self.right_level)
         self.uniform_player.lvl = self.uniform_level
 
-
         self.current_level = self.uniform_level
+        # self.current_level = self.right_level
+        # self.current_level = self.random_level
         self.title = "Colonel Balloon"
 
         # GAMBIT =======================================
         self.gambit = gambit.Game.new_table((self.sLen, self.sLen))
-        self.gambit.title = "Balloon Game"
         # self.mixed = self.gambit.mixeds_strategy_profile()
-        self.mixed = [0 for i in range(self.sLen)]
+        self.mixed = [0]*self.sLen
 
     def randomize_k(self):
         return choice([9, 12, 15, 18])
@@ -138,6 +151,7 @@ class Game():
         s_object = Strategy()
         self.strategy = s_object.plan_enumerations(self.ball, self.k)
         self.sLen = len(self.strategy)
+        self.mixed = [0] * self.sLen
 
 #
 # def main():
